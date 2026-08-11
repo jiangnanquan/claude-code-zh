@@ -1,15 +1,24 @@
 # SOP — 升级与维护流程
 
+## 场景零：例行检查（「检查cc版本」「cc更新」）
+
+```bash
+bash scripts/check_update.sh
+# 输出: CC 当前/最新版本（npm + GitHub 双来源）、安装形态、
+#       汉化状态（上次 patch 版本 vs 当前）、翻译表上游对比、平台窗口
+# 只读检查，不改动任何东西；结论里会给出下一步动作指引
+```
+
 ## 场景一：Claude Code 官方升级后重新汉化
 
 ```bash
 # 1. 确认新版本（升级后二进制变化，旧 patch 可能部分失效）
-claude --version
+bash scripts/check_update.sh   # 或直接 claude --version
 
 # 2. 迁移最新翻译表（合并 i18n/patches.json 本地补丁，保留 skipPatch）
 python3 scripts/migrate_i18n.py
 
-# 3. 应用（自动处理：备份恢复 → patch → 冒烟 → 状态）
+# 3. 应用（自动处理：备份恢复 → extract → patch → repack → 验证 → 冒烟 → 状态）
 bash scripts/apply_patch.sh
 # 预期输出: patch 完成 ok/partial + 冒烟通过
 
@@ -19,6 +28,16 @@ python3 scripts/check_residue.py
 #   - skipPatch 标记 → 有意保留，跳过
 #   - 非字面量位置（模板拼接/代码字典）→ patch 不替换，保持英文
 #   - 确认为真 UI 字面量 → 修正 i18n/patches.json 后重跑 2-3
+```
+
+## 场景五：CC 主版本跨度升级（2.x → 3.x）
+
+```bash
+# check_update.sh 会提示 breaking changes；此时：
+# 1. 升级 CC 本体（npm install -g @anthropic-ai/claude-code@<目标版本>）
+# 2. 平台窗口超出 2.1.113 – 2.1.227 时，优先跑 apply + check_residue 甄别
+# 3. patch 引擎对新版本文字自动优雅降级（匹配不上的条目保持英文），
+#    按场景一第 4 步甄别后决定是否补 i18n/patches.json
 ```
 
 ## 场景二：翻译表来自上游插件的更新

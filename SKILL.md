@@ -1,6 +1,6 @@
 ---
 name: claude-code-zh
-description: Claude Code CLI 简体中文汉化（自管项目）——自己的翻译表 + patch 工具，只改 UI 文字不影响功能。适用场景：「汉化cc」「重新汉化」「汉化不生效」「cc升级后重汉化」「回滚汉化」。维护 ~/Dev/Private/claude-code-zh，与 claude-code-zh-cn 插件同思路但独立维护。
+description: Claude Code CLI 简体中文汉化（自管项目）——自己的翻译表 + patch 工具 + 升级检查，只改 UI 文字不影响功能。适用场景：「汉化cc」「重新汉化」「汉化不生效」「cc升级后重汉化」「回滚汉化」「检查cc版本」「cc更新」。维护 ~/Dev/Private/claude-code-zh，与 claude-code-zh-cn 插件同思路但独立维护（已接管其职责，cc升级 skill 已并入）。
 allowed-tools: Bash
 ---
 
@@ -21,6 +21,9 @@ bash scripts/apply_patch.sh --status
 
 # 回滚英文原版
 bash scripts/apply_patch.sh --restore
+
+# 检查升级（CC 本体版本 / 汉化状态 / 翻译表上游，只读不改动）
+bash scripts/check_update.sh
 ```
 
 ## 更新流程（官方发布新版 / 汉化不生效时）
