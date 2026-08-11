@@ -111,10 +111,14 @@ if ! node "$BUN_IO" extract "$CLI_BIN" "$TMP_JS" 2>>"$LOG"; then
 fi
 
 log "patch: 对提取文本应用翻译表..."
+# 跑两遍：第二遍幂等（已替换的规则不命中），但能让第一遍被扫描器
+# 状态跳过的字面量（如部分 skill 描述，干净版文本上扫描异常）补命中
 PATCH_COUNT="$(node "$ROOT/tools/patch-cli.js" "$TMP_JS" "$ROOT/i18n/translations.json" \
     --status "$PATCH_STATUS_FILE" --log "$LOG" 2>&1 | tail -1 || true)"
+PATCH_COUNT_2="$(node "$ROOT/tools/patch-cli.js" "$TMP_JS" "$ROOT/i18n/translations.json" \
+    --status "$PATCH_STATUS_FILE" --log "$LOG" 2>&1 | tail -1 || true)"
 ENGINE_STATUS="$(cat "$PATCH_STATUS_FILE" 2>/dev/null || echo unknown)"
-log "patch 引擎: ${ENGINE_STATUS}（替换 ${PATCH_COUNT} 处）"
+log "patch 引擎: ${ENGINE_STATUS}（第一遍替换 ${PATCH_COUNT} 处，第二遍 ${PATCH_COUNT_2} 处）"
 
 case "$ENGINE_STATUS" in
     ok)        log "patch 完成: ok（全部命中）" ;;

@@ -1,0 +1,5 @@
+time:        2026-08-11 15:20:31
+cli_version: 2.1.227 (Claude Code)
+engine:      ok
+translations: sha256=5b859fbfd8b04ae360bec676dc6b0c3da4a3f6a81ab8c1e8bf9c38595fb85b56
+smoke:       PASS

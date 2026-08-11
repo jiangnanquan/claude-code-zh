@@ -31,13 +31,38 @@ npm 重装/升级会清掉 bin 目录（备份一起消失）。此时新二进�
 - Claude Code 2.1.x 支持加载符号链接 skill（实测 opencode-zh 正常）
 - 若某版本 CC 不再加载软链 skill：把 SKILL.md 复制进 `~/.claude/skills/`，保留项目本体在 Private
 
-## 5. 已知英文残留清单（2.1.227，均不影响功能）
+## 5. skill 描述汉化（2026-08-11 已验证可行）
+
+内置 skill 的 description 大多在**提取的 JS 源码字面量**里（`var Q$v='...'` 或
+`description:'...'` 或 SKILL.md 模板字符串内）——**可以 patch**，前提是：
+
+- en 不得含单引号 `'`（needle 会被转义成 `\'` 导致不匹配）→ **含 `'` 的整段拆成多个无 `'` 片段**分别替换
+- en 片段不得以反斜杠结尾（`\'` 的前半）→ 拆分点避开
+- dataviz 的描述被 minifier 拆成两个相邻字面量 → 同样按片段处理
+
+已验证 11 条 skill 描述补丁全部生效（dataviz、keybindings-help、update-config、
+loop、claude-api、verify、dataviz-menu）。**fewer-permission-prompts 的说明不在
+提取 JS 内**（原生数据区），保持英文。
+
+## 6. 两遍 patch（apply_patch.sh 内置）
+
+部分字面量（如 keybindings-help 的 description）在**干净英文版**文本上会被扫描器
+状态跳过，但在**已汉化版**文本上能扫到 → 第一遍 patch 未命中，第二遍（幂等）
+补命中。apply_patch.sh 已内置两遍运行，无需人工干预。
+
+## 7. 验证方法坑
+
+- **extract 输出 ≠ 二进制内容**：部分字符串在 extract 时被转义（`\uXXXX`）或模板拼接
+  （如 help 头「用法：claude」是 `用法：` + 变量拼接，二进制里无连续字节）→
+  **验证用「实际运行」（--help 输出）或二进制 UTF-8 find，不要用 re-extract 文本 find**
+- check_residue.py 的 en 检测在二进制上做（UTF-8 find），结果可信
+
+## 8. 已知英文残留清单（2.1.227，均不影响功能）
 
 - `You have been invoked in the following environment: `（系统提示，skipPatch 保护）
 - `Your responses should be short and concise.`（系统提示，skipPatch 保护）
 - `Saving a memory is a two-step process:`（记忆提示，skipPatch 保护）
-- run skill 描述（bun 字符串表；有 CC 原生中文兜底，实际显示中文）
-- dataviz / keybindings-help / fewer-permission-prompts / verify 的 skill 描述（bun 字符串表，英文）
+- fewer-permission-prompts 的 skill 说明（原生数据区，patch 不可达）
 - 压缩通知 `(for history)` / `(to see full summary)`（模板拼接）
 - `[hidden]`、`Not working` 等少量标签（位置待查，影响极小）
 

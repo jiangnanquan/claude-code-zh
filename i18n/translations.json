@@ -1,13 +1,33 @@
 [
   {
+    "en": "Use this skill whenever you are about to create ANY chart, graph, plot, dashboard, or data visualization, in ANY output medium \\u2014 an HTML or React artifact, inline SVG, plotting code in any library (matplotlib, plotly, d3, Recharts, \\u2026), an image/PNG you will render and upload, or a chart shared into Slack. Read it BEFORE writing the first line of chart code, choosing chart colors, building a stat tile / meter / KPI row, or laying out a dashboard. Produces visualizations that read as one system \\u2014 elegant, accessible, consistent in light and dark \\u2014 using a brand-neutral placeholder palette you swap for your own. Teaches a design-system-agnostic method: a form heuristic, a color formula with a runnable validator, mark specs, and interaction rules. A validated default palette is documented in `references/palette.md` \\u2014 swap that file",
+    "zh": "当你要创建任何图表、图形、绘图、仪表板或数据可视化，无论输出媒介是什么——HTML 或 React 构件、内联 SVG、任何库（matplotlib、plotly、d3、Recharts 等）中的绘图代码、将要渲染并上传的图片/PNG，还是分享到 Slack 的图表——都使用本 skill。在写第一行图表代码、选择图表颜色、构建统计块/指标行或布置仪表板之前先阅读它。产出的可视化作品读起来像一个整体——优雅、易读、明暗主题一致——使用可替换的中性品牌调色板。教授一套与设计系统无关的方法：形式启发式、可运行校验器的颜色公式、标记规范和交互规则。经过验证的默认调色板记录在 `references/palette.md`——将其中值替换为你的品牌色。触发词：\"chart\"、\"graph\"、\"plot\"、\"data viz\"、\"visualization\"、\"dashboard\"、\"analytics\"、\"visualize data\"、\"",
+    "source": "内置skill描述汉化-dataviz-A"
+  },
+  {
     "en": "Use this skill to configure the Claude Code harness via settings.json. Automated behaviors (\"from now on when X\", \"each time X\", \"whenever X\", \"before/after X\") require hooks configured in settings.json - the harness executes these, not Claude, so memory/preferences cannot fulfill them. Also use for: permissions (\"allow X\", \"add permission\", \"move permission to\"), env vars (\"set X=Y\"), hook troubleshooting, or any changes to settings.json/settings.local.json files. Examples: \"allow npm commands\", \"add bq permission to global settings\", \"move permission to user settings\", \"set DEBUG=true\", \"when claude stops show X\". For simple settings like theme/model, use Config tool.",
     "zh": "使用此技能通过 settings.json 配置 Claude Code harness。自动化行为（“从现在起当 X”“每次 X”“每当 X”“在 X 之前/之后”）需要在 settings.json 中配置 Hook - 这些由 harness 执行，不是 Claude，因此记忆/偏好无法满足它们。也用于：权限（“允许 X”“添加权限”“移动权限到”）、环境变量（“设置 X=Y”）、Hook 故障排查，或对 settings.json/settings.local.json 的任何修改。示例：“允许 npm 命令”“向全局设置添加 bq 权限”“将权限移到用户设置”“设置 DEBUG=true”“当 claude 停止时显示 X”。对于主题/模型这类简单设置，请使用 Config 工具。",
     "source": "upstream"
   },
   {
+    "en": "使用此技能通过 settings.json 配置 Claude Code harness。 Automated behaviors (\"from now on when X\", \"each time X\", \"whenever X\", \"before/after X\") require hooks configured in settings.json - the harness executes these, not Claude, so memory/preferences cannot fulfill them. Also use for: permissions (\"allow X\", \"add permission\", \"move permission to\"), env vars (\"set X=Y\"), hook troubleshooting, or any changes to settings.json/settings.local.json files. 示例： \"allow npm commands\", \"add bq permission to global settings\", \"move permission to user settings\", \"set DEBUG=true\", \"when claude stops show X\". For simple settings like theme/model, suggest the /config command.",
+    "zh": "使用此技能通过 settings.json 配置 Claude Code harness。自动化行为（\"from now on when X\"、\"each time X\"、\"whenever X\"、\"before/after X\"）需要配置 hooks，由 harness 执行而非 Claude 自己——记忆/偏好设置无法实现这些。也适用于：权限（\"allow X\"、\"add permission\"、\"move permission to\"）、环境变量（\"set X=Y\"）、hook 排障，或对 settings.json/settings.local.json 文件的任何修改。示例：\"allow npm commands\"、\"add bq permission to global settings\"、\"move permission to user settings\"、\"set DEBUG=true\"、\"when claude stops show X\"。简单的设置（主题/模型）建议用 /config 命令。",
+    "source": "内置skill描述汉化-update-config"
+  },
+  {
     "en": "Minimal mode: skip hooks, LSP, plugin sync, attribution, auto-memory, background prefetches, keychain reads, and CLAUDE.md auto-discovery. Sets CLAUDE_CODE_SIMPLE=1. Anthropic auth is strictly ANTHROPIC_API_KEY or apiKeyHelper via --settings (OAuth and keychain are never read). 3P providers (Bedrock/Vertex/Foundry) use their own credentials. Skills still resolve via /skill-name. Explicitly provide context via: --system-prompt[-file], --append-system-prompt[-file], --add-dir (CLAUDE.md dirs), --mcp-config, --settings, --agents, --plugin-dir.",
     "zh": "极简模式：跳过 hooks、LSP、插件同步、归因、自动记忆、后台预取、钥匙串读取和 CLAUDE.md 自动发现。设置 CLAUDE_CODE_SIMPLE=1。Anthropic 身份验证严格使用 ANTHROPIC_API_KEY 或通过 --settings 配置的 apiKeyHelper（不会读取 OAuth 和钥匙串）。第三方 provider（Bedrock/Vertex/Foundry）使用各自凭据。Skills 仍可通过 /skill-name 解析。请显式提供上下文：--system-prompt[-file]、--append-system-prompt[-file]、--add-dir（CLAUDE.md 目录）、--mcp-config、--settings、--agents、--plugin-dir。",
     "source": "upstream"
+  },
+  {
+    "en": " \\u2014 whenever: the prompt names Claude/Anthropic in any form (Claude, Anthropic, Fable, Opus, Sonnet, Haiku, `anthropic`, `@anthropic-ai`, `claude-*`, `us.anthropic.*`, `[1m]`); the user asks about an LLM (pricing/model choice/limits/caching) \\u2014 never answer from memory; OR the task is LLM-shaped with provider unstated (agent/MCP/tool-definition/multi-agent/RAG/LLM-judge/computer-use; generate/summarize/extract/classify/rewrite/converse over NL; debugging refusals/cutoffs/streaming/tool-calls/tokens).",
+    "zh": "——当提示词以任何形式提到 Claude/Anthropic（Claude、Anthropic、Fable、Opus、Sonnet、Haiku、`anthropic`、`@anthropic-ai`、`claude-*`、`us.anthropic.*`、`[1m]`）；用户询问 LLM 问题（定价/模型选择/限制/缓存）——绝不凭记忆回答；或任务形态是 LLM 相关且未说明提供商（agent/MCP/tool-definition/multi-agent/RAG/LLM-judge/computer-use；generate/summarize/extract/classify/rewrite/converse over NL；debugging refusals/cutoffs/streaming/tool-calls/tokens）时使用本 skil",
+    "source": "内置skill描述汉化-claude-api"
+  },
+  {
+    "en": "Verify that a code change actually does what it's supposed to by exercising it end-to-end and observing behavior \\u2014 drive the affected flow, not just tests or typecheck. Run before committing nontrivial changes; bootstraps this repo's project verify skill if none exists yet. Don't invoke it on a diff that only touches tests, docs, or other code with no runtime surface to drive (a change to product source always has one) \\u2014 there's nothing to observe.",
+    "zh": "通过端到端实际运行来验证代码改动确实达到预期效果——驱动受影响的流程，而不是只跑测试或类型检查。在提交有实际内容的改动之前执行；如果本仓库还没有项目 verify skill，它会先引导创建一个。不要对只涉及测试、文档或其他没有运行时表面可驱动的改动调用它（产品源码的改动总是有运行表面的）——那时没有什么可观察的。",
+    "source": "内置skill描述汉化-verify"
   },
   {
     "en": "Create a new Cowork plugin from scratch, or customize an installed plugin for a specific organization. Use when: customize plugin, set up plugin, configure plugin, tailor plugin, adjust plugin settings, customize plugin connectors, customize plugin skill, tweak plugin, modify plugin configuration, create a plugin, build a plugin, make a new plugin, develop a plugin, scaffold a plugin.",
@@ -38,6 +58,11 @@
     "en": "Author or improve the run-<unit> skill \\u2014 a per-project skill that tells agents how to build, launch, and drive this project's app. Use when the user asks to set up the project, get it running, write run instructions, or verify build/run steps work from a clean environment.",
     "zh": "编写或改进 run-<unit> skill：这是一个项目级 skill，用来告诉 Agent 如何构建、启动并操作此项目的应用。适用于用户要求设置项目、让项目跑起来、编写运行说明，或验证构建/运行步骤能否在干净环境中生效时。",
     "source": "upstream"
+  },
+  {
+    "en": "s. Triggers on: \"chart\", \"graph\", \"plot\", \"data viz\", \"visualization\", \"dashboard\", \"analytics\", \"visualize data\", \"categorical colors\", \"sequential / diverging palette\", \"stat tile\", \"sparkline\", \"heatmap\", \"legend\", \"axis\", \"tooltip\", \"chart colors\", \"color by series\".",
+    "zh": " colors\"、\"sequential / diverging palette\"、\"stat tile\"、\"sparkline\"、\"heatmap\"、\"legend\"、\"axis\"、\"tooltip\"、\"chart colors\"、\"color by series\"。",
+    "source": "内置skill描述汉化-dataviz-C"
   },
   {
     "en": "Run eval cases (evals/**/case.yaml or evals/**/prompt.md + graders/*.md) against a plugin and report scored results. Target is a path, a plugin name, or a `plugin@marketplace` id — installed and skills-dir plugins both resolve (and add a no-plugin baseline arm)",
@@ -73,6 +98,16 @@
     "en": "Enable automatic fallback to specified model(s) when the default model is overloaded or not available. Accepts a comma-separated list to try each in order. Re-tries the primary at the start of each user turn. (only works with --print)",
     "zh": "默认模型过载或不可用时，自动回退到指定模型。可用逗号分隔多个模型并按顺序尝试；每轮用户输入开始时会重新尝试主模型（仅 --print 有效）",
     "source": "upstream"
+  },
+  {
+    "en": "Use when the user wants to customize keyboard shortcuts, rebind keys, add chord bindings, or modify ~/.claude/keybindings.json. 示例： \"rebind ctrl+s\", \"add a chord shortcut\", \"change the submit key\", \"customize keybindings\".",
+    "zh": "当用户想要自定义键盘快捷键、重绑按键、添加和弦绑定或修改 ~/.claude/keybindings.json 时使用。示例：\"rebind ctrl+s\"、\"add a chord shortcut\"、\"change the submit key\"、\"customize keybindings\"。",
+    "source": "内置skill描述汉化-keybindings-help"
+  },
+  {
+    "en": "When the user wants to set up a recurring task, poll for status, or run something repeatedly on an interval (e.g. \"check the deploy every 5 minutes\", \"keep running /babysit-prs\"). Do NOT invoke for one-off tasks.",
+    "zh": "当用户想要设置定时任务、轮询状态或在固定间隔重复运行某操作（例如 \"check the deploy every 5 minutes\"、\"keep running /babysit-prs\"）时使用。请勿用于一次性任务。",
+    "source": "内置skill描述汉化-loop-tail"
   },
   {
     "en": "Check the health of your Claude Code auto-updater. Note: The workspace trust dialog is skipped and stdio servers from .mcp.json are spawned for health checks. Only use this command in directories you trust.",
@@ -1845,6 +1880,11 @@
     "source": "upstream"
   },
   {
+    "en": "TRIGGER \\u2014 read BEFORE opening the target file; don",
+    "zh": "TRIGGER——打开目标文件前务必先读",
+    "source": "内置skill描述汉化-claude-api-prefix-A"
+  },
+  {
     "en": "This will terminate the Claude Code on the web session.",
     "zh": "这将终止 Claude Code 网页版会话。",
     "source": "upstream"
@@ -3057,6 +3097,11 @@
     "source": "upstream"
   },
   {
+    "en": "t skip because it \"looks like a one-liner\"",
+    "zh": "；不要因为它\"看起来只有一行\"就跳过",
+    "source": "内置skill描述汉化-claude-api-prefix-B"
+  },
+  {
     "en": "… diff truncated (exceeded 400 line limit)",
     "zh": "… diff 已截断（超过 400 行限制）",
     "source": "upstream"
@@ -3751,6 +3796,11 @@
     "en": " · Present a plan for your approval",
     "zh": " · 提交计划供你审批",
     "source": "upstream"
+  },
+  {
+    "en": "Chart and dashboard design guidance",
+    "zh": "图表与仪表板设计指南",
+    "source": "内置skill描述汉化-dataviz-menu"
   },
   {
     "en": "Claude Code successfully installed!",
@@ -5656,6 +5706,11 @@
     "en": "iTerm2 Split Pane Setup",
     "zh": "iTerm2 分屏设置",
     "source": "upstream"
+  },
+  {
+    "en": "s values for your brand",
+    "zh": "categorical",
+    "source": "内置skill描述汉化-dataviz-B"
   },
   {
     "en": " tokens · /autocompact",
