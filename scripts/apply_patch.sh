@@ -68,13 +68,12 @@ if [ "${1:-}" = "--restore" ]; then
 fi
 
 CLI_DIR="$(dirname "$CLI_BIN")"
-VERSION_CMD="$(dirname "$CLI_BIN")/claude --version 2>/dev/null || claude --version 2>/dev/null"
-CUR_VERSION="$("${CLI_BIN%/*}/claude" --version 2>/dev/null || claude --version 2>/dev/null || echo unknown)"
+CUR_VERSION="$("$CLI_BIN" --version 2>/dev/null || claude --version 2>/dev/null || echo unknown)"
 log "当前版本: $CUR_VERSION"
 
 # 已 patch 探测：help 头部是否已是中文
 is_patched() {
-    "${CLI_BIN%/*}/claude" --help 2>/dev/null | grep -q "用法：claude"
+    "$CLI_BIN" --help 2>/dev/null | grep -q "用法：claude"
 }
 
 # --- 备份托管：保证每次 patch 基于干净英文原文 --------------------------
@@ -135,7 +134,7 @@ else
     fi
     rm -f "$TMP_JS"
     log "验证: 执行二进制确认版本..."
-    VERIFIED="$("${CLI_BIN%/*}/claude" --version 2>&1 | head -1 || true)"
+    VERIFIED="$("$CLI_BIN" --version 2>&1 | head -1 || true)"
     log "repack 后版本: ${VERIFIED}"
     if [ -z "$VERIFIED" ] || [ "$VERIFIED" != "$TARGET_VERSION" ]; then
         log "错误: repack 后版本异常——立即从备份恢复"
@@ -147,17 +146,17 @@ fi
 # --- 冒烟测试 -----------------------------------------------------------
 log "冒烟测试..."
 SMOKE_OK=1
-if "${CLI_BIN%/*}/claude" --version >/dev/null 2>&1; then
+if "$CLI_BIN" --version >/dev/null 2>&1; then
     log "  --version ✓"
 else
     log "  --version ✗ 失败！"; SMOKE_OK=0
 fi
-if "${CLI_BIN%/*}/claude" --help 2>&1 | head -3 | grep -q "用法：claude"; then
+if "$CLI_BIN" --help 2>&1 | head -3 | grep -q "用法：claude"; then
     log "  --help 中文 ✓"
 else
     log "  --help 中文 ✗ 未汉化或输出异常"; SMOKE_OK=0
 fi
-if "${CLI_BIN%/*}/claude" --help 2>&1 | head -3 | grep -q "Usage: claude"; then
+if "$CLI_BIN" --help 2>&1 | head -3 | grep -q "Usage: claude"; then
     log "  --help 仍有英文头部 ✗"; SMOKE_OK=0
 else
     log "  --help 无英文残留 ✓"
