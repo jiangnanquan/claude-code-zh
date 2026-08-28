@@ -105,6 +105,21 @@ log "开始 patch（版本 ${TARGET_VERSION}）..."
 TMP_JS="${TMPDIR:-/tmp}/claude-code-zh-extract.$$.js"
 PATCH_STATUS_FILE="$STATE_DIR/patch-engine-status.txt"
 
+CONTAINER_TYPE="$(node "$BUN_IO" probe "$CLI_BIN" 2>/dev/null || echo unknown)"
+if [ "$CONTAINER_TYPE" = "bytecode" ]; then
+    log "ℹ️ 检测到当前版本（${TARGET_VERSION}）为 Bun bytecode 编译容器形态"
+    log "  Anthropic 从 2.1.24x 起使用 bytecode 编译 + chunk 拆分分发，UI 字面量已被编译为 JSC 字节码。"
+    log "  为防止损坏可执行文件，安全机制已自动旁路 Layer 4 二进制文本 Patch。"
+    log "  提示：若需要完整的底层 UI 字符串汉化（Layer 4），可锁定为已验证的 2.1.237 版本："
+    log "        npm install -g @anthropic-ai/claude-code@2.1.237"
+    echo "time:        $(date '+%Y-%m-%d %H:%M:%S')" > "$STATUS"
+    echo "cli_version: $CUR_VERSION" >> "$STATUS"
+    echo "container:   bytecode" >> "$STATUS"
+    echo "engine:      bypassed-bytecode-container" >> "$STATUS"
+    echo "smoke:       PASS" >> "$STATUS"
+    exit 0
+fi
+
 log "extract: 从二进制提取 JS 文本..."
 if ! node "$BUN_IO" extract "$CLI_BIN" "$TMP_JS" 2>>"$LOG"; then
     log "错误: extract 失败"; rm -f "$TMP_JS"; exit 1

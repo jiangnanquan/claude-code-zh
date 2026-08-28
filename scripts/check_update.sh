@@ -35,8 +35,9 @@ for c in "$(npm prefix -g 2>/dev/null)/lib/node_modules/@anthropic-ai/claude-cod
 done
 if [ -n "$BIN" ]; then
     SIZE="$(stat -f%z "$BIN" 2>/dev/null || echo ?)"
+    CONTAINER="$(node "$ROOT/tools/bun-binary-io.js" probe "$BIN" 2>/dev/null || echo unknown)"
     echo "  安装形态:      npm 全局（${BIN}，${SIZE} 字节）"
-    [ "$SIZE" -gt 100000000 ] 2>/dev/null && echo "                  ↑ native binary 形态（≥100MB，wrapper + 原生二进制）"
+    [ "$SIZE" -gt 100000000 ] 2>/dev/null && echo "                  ↑ native binary 形态（容器类型: ${CONTAINER}）"
 else
     echo "  安装形态:      非 npm 全局路径（安装器/其他），升级请用官方安装渠道"
 fi
@@ -95,8 +96,9 @@ fi
 # --- 6. 平台窗口记录（巧思：macOS native binary 已验证窗口） --------------
 echo ""
 echo "== 平台记录 =="
-echo "  macOS arm64 native binary 已验证窗口: 2.1.113 – 2.1.227（本项目自验证）"
-echo "  超出窗口的版本：优先跑 apply_patch.sh + check_residue.py 甄别，残留清单见 PITFALLS.md"
+echo "  macOS arm64 native binary 已验证窗口: 2.1.113 – 2.1.237（可进行底层二进制 JS 字面量 Patch）"
+echo "  2.1.24x+ 容器形态: Bun Bytecode 编译容器（安全旁路 Layer 4 Patch，避免破坏二进制；Layer 1~3 正常生效）"
+echo "  如需强制完整底层 UI 汉化: npm install -g @anthropic-ai/claude-code@2.1.237"
 
 # --- 汇总 ---------------------------------------------------------------
 echo ""
