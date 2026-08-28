@@ -30,7 +30,7 @@ python3 scripts/check_residue.py
 #   - 确认为真 UI 字面量 → 修正 i18n/patches.json 后重跑 2-3
 ```
 
-## 场景五：CC 版本跨度或容器形态变化（2.1.24x+ Bytecode 容器）
+## 场景五：CC 版本跨度或容器形态变化（2.1.242+ Bytecode 容器）
 
 ```bash
 # 1. 升级 CC 本体（npm install -g @anthropic-ai/claude-code@latest）
@@ -38,8 +38,8 @@ python3 scripts/check_residue.py
 bash scripts/check_update.sh
 # 3. 运行 apply_patch.sh（自动识别容器：若为 bytecode 容器则自动旁路 Layer 4 patch，安全保护二进制）
 bash scripts/apply_patch.sh
-# 4. 如需强制完整底层 UI 汉化，可指定安装已验证版本：
-#    npm install -g @anthropic-ai/claude-code@2.1.237
+# 4. 如需强制完整底层 UI 汉化，可指定安装支持明文 Patch 的最高版本：
+#    npm install -g @anthropic-ai/claude-code@2.1.241
 ```
 
 ## 场景二：翻译表来自上游插件的更新

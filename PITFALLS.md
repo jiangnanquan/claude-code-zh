@@ -68,12 +68,13 @@ loop、claude-api、verify、dataviz-menu）。**fewer-permission-prompts 的说
 
 新版本残留以 `check_residue.py` 输出为准，对照本表甄别。
 
-## 9. Bun 2.1.24x+ Bytecode 编译容器与安全旁路
+## 9. Bun 2.1.242+ Bytecode 编译容器与安全旁路
 
-- 从 Claude Code `2.1.238` / `2.1.24x` 开始，官方构建启用了 Bun 的 bytecode 编译与 chunk 代码拆分。
-- 在此形态下，入口模块（如 `/$bunfs/root/cli`）只剩 19KB 的引导 stub，真实 UI 字符串被打包进 compiled bytecode chunk。
+- 实测版本边界：`2.1.241` 是支持明文 JS 提取与 Layer 4 二进制 Patch 的**最后一个版本**（容器类型为 `source-js`）。
+- 从 Claude Code `2.1.242` 开始，官方构建正式启用了 Bun 的 bytecode 编译与 chunk 代码拆分。
+- 在 `2.1.242+` 形态下，入口模块（如 `/$bunfs/root/cli`）只剩 19KB 的引导 stub，真实 UI 字符串被打包进 compiled bytecode chunk。
 - 对 bytecode 编译容器强制执行 `extract -> patch -> repack` 会导致 bytecode 指针错位，运行时报 `Segmentation fault` 或 `parseFromSourceCode failed`。
 - 本项目工具链已内置安全检测（`bun-binary-io.js probe`）：对 `bytecode` 容器形态自动安全旁路 Layer 4 二进制 patch，杜绝损坏二进制。
 - **推荐策略**：
-  - 维持当前新版（2.1.248+）：通过 Prompt/Rules/Skills 保持交互中文，底层 CLI 保持官方原版稳定运行。
-  - 需要完整的底层 UI 汉化（Layer 4）：可锁定为已验证的 2.1.237 版本（`npm install -g @anthropic-ai/claude-code@2.1.237`）。
+  - 需要完整的底层 UI 汉化（Layer 4）：锁定安装已验证的最高版本 `2.1.241`（`npm install -g @anthropic-ai/claude-code@2.1.241`）。
+  - 维持官方最新版（2.1.250+）：通过 Prompt/Rules/Skills 保持交互中文，底层 CLI 保持官方原版稳定运行。

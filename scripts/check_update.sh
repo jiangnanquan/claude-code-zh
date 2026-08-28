@@ -96,9 +96,9 @@ fi
 # --- 6. 平台窗口记录（巧思：macOS native binary 已验证窗口） --------------
 echo ""
 echo "== 平台记录 =="
-echo "  macOS arm64 native binary 已验证窗口: 2.1.113 – 2.1.237（可进行底层二进制 JS 字面量 Patch）"
-echo "  2.1.24x+ 容器形态: Bun Bytecode 编译容器（安全旁路 Layer 4 Patch，避免破坏二进制；Layer 1~3 正常生效）"
-echo "  如需强制完整底层 UI 汉化: npm install -g @anthropic-ai/claude-code@2.1.237"
+echo "  macOS arm64 native binary 已验证窗口: 2.1.113 – 2.1.241（可进行底层二进制 JS 字面量 Patch）"
+echo "  2.1.242+ 容器形态: Bun Bytecode 编译容器（安全旁路 Layer 4 Patch，避免破坏二进制；Layer 1~3 正常生效）"
+echo "  如需强制完整底层 UI 汉化: npm install -g @anthropic-ai/claude-code@2.1.241"
 
 # --- 汇总 ---------------------------------------------------------------
 echo ""

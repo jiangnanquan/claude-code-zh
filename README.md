@@ -8,7 +8,7 @@
 >
 > **影响**：提取-重打包路线（本项目与上游 [taekchef/claude-code-zh-cn](https://github.com/taekchef/claude-code-zh-cn)）已无法继续——`extract` 只能拿到约 20KB 的 `// @bun @bytecode` stub，强行 `repack` 会损坏二进制（实测体积缩水约 10MB、启动即 segfault）。上游已于 [PR #235](https://github.com/taekchef/claude-code-zh-cn/pull/235) 正式放弃该路线；本项目的 patch 工具同步转为**安全旁路模式**（probe 检测到 bytecode 容器自动跳过，绝不改动二进制）。
 >
-> **本机状态**：维持 Claude Code **2.1.250 官方原版**（底层 UI 为英文），交互层中文由中文 skill / 系统提示 / rules 承担。如需完整底层 UI 汉化，可锁定最后可汉化版本 **2.1.237 / 2.1.241**：`npm install -g @anthropic-ai/claude-code@2.1.237`。
+> **现阶段状态**：如需完整底层 UI 汉化，可锁定最后可汉化版本 **2.1.237 / 2.1.241**：`npm install -g @anthropic-ai/claude-code@2.1.237`。
 
 > 一个完全自管的 **Claude Code CLI 汉化项目**：自己的翻译表、自己的 patch 工具、
 > 自己的甄别与冒烟测试。**只做 UI 文字汉化，不碰任何功能逻辑**。
