@@ -101,6 +101,8 @@ claude-code-zh/
 │   ├── apply_patch.sh       # 应用汉化（定位/备份/patch/冒烟/状态）
 │   ├── check_residue.py     # 残留检测
 │   └── smoke_test.sh        # 冒烟测试
+├── patches/
+│   └── claude-hud-ascii-bar.patch  # 第三方插件本地定制：claude-hud 状态栏进度条 ASCII 化
 ├── SOP.md                   # 升级与维护流程
 ├── PITFALLS.md              # 已知坑
 └── SKILL.md                 # skill 入口（/claude-code-zh）
