@@ -1,5 +1,5 @@
 import { describe, expect, mock, test, tier } from 'claude-code/testing'
-import { duration, groupLine, register, tr, trWhole } from '../hooks/register.tsx'
+import { duration, groupLine, register, spinnerWord, tr, trDesc, trWhole } from '../hooks/register.tsx'
 
 tier('user')
 
@@ -43,6 +43,35 @@ describe('cc-zh', () => {
     // 半译（还剩长英文单词）⇒ 放弃
     const d2 = { ...D, patterns: [{ re: '^Set (\\S+) to (.+)$', to: '已设置 $1' }] }
     expect(trWhole(d2, 'Set theme to dark')).toBeUndefined()
+  })
+
+  test('trDesc：命中即返回译文；未命中返回 undefined（供 command.describe 分辨）', () => {
+    expect(trDesc(D, 'Exit the CLI')).toBe('退出 CLI')
+    // 关键回归：patterns 必须在这条路径上生效，否则带运行时变量的描述永远译不到
+    expect(trDesc(D, 'Set theme to dark')).toBe('已设置 theme → dark')
+    const d2 = {
+      ...D,
+      patterns: [{ re: '^Set the AI model for Claude Code \\(currently (.+)\\)$',
+                   to: '设置 Claude Code 使用的 AI 模型（当前：$1）' }],
+    }
+    expect(trDesc(d2, 'Set the AI model for Claude Code (currently opus-4)'))
+      .toBe('设置 Claude Code 使用的 AI 模型（当前：opus-4）')
+    expect(trDesc(D, 'a phrase nobody translated')).toBeUndefined()
+    // ANSI 也要在查表前剥掉
+    expect(trDesc(D, '\u001b[36mExit the CLI\u001b[39m')).toBe('退出 CLI')
+  })
+
+  test('spinnerWord：已中文一律放行（不覆盖用户 spinnerVerbs）；仅英文才接替', () => {
+    // 关键回归：用户用官方 settings.json 的 spinnerVerbs 配了自定义中文动词时，
+    // 必须原样放行 —— 否则会被固定词表换成「思考中」，属体验退化。
+    expect(spinnerWord(D, 'thinking', '烘焙中')).toEqual({ word: '烘焙中', missed: false })
+    expect(spinnerWord(D, 'thinking', '焯水ing')).toEqual({ word: '焯水ing', missed: false })
+    // 仍是英文 ⇒ 用词典
+    expect(spinnerWord(D, 'thinking', 'Thinking')).toEqual({ word: '思考中', missed: false })
+    // 仍是英文且词典没有 ⇒ 放行并标记 missed（供 /cc-zh-dump 收集）
+    expect(spinnerWord(D, 'brainstorming', 'Brainstorming')).toEqual({ word: 'Brainstorming', missed: true })
+    // 无词可依时保持 undefined 语义
+    expect(spinnerWord(D, 'brainstorming', undefined)).toEqual({ word: undefined, missed: true })
   })
 
   test('groupLine：已知工具 → 中文摘要；含未知工具 → undefined（交回引擎原文）', () => {

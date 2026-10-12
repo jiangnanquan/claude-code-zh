@@ -1,6 +1,6 @@
 {
  "_note": "cc-zh mod 词典。exact = 引擎英文原文 → 中文（复用于 command.describe / config.describe / PromptHint / InfoNotice / CommandOutput / 等以英文原文为键的钩子）。命不中即放行原文，不猜。",
- "_source": "exact 表由 i18n/translations.json 迁移（upstream 1894 条 + 本地补丁 11 条），去重后 1898 条",
+ "_source": "exact 表底子来自历史二进制补丁路线的翻译表（upstream claude-code-zh-cn 1894 条 + 本地补丁 11 条，MIT）；原 i18n/ 已随 2026-10-12 项目重启删除，本文件为唯一词典",
  "spinner": {
   "thinking": "思考中",
   "requesting": "请求中",
@@ -13,6 +13,18 @@
   {
    "re": "^Set (\\S+(?: \\S+)*?) to (.+)$",
    "to": "已设置 $1 → $2"
+  },
+  {
+   "re": "^Set the AI model for Claude Code \\(currently (.+)\\)$",
+   "to": "设置 Claude Code 使用的 AI 模型（当前：$1）"
+  },
+  {
+   "re": "^Toggle fast mode \\((.+)\\)$",
+   "to": "切换快速模式（$1）"
+  },
+  {
+   "re": "^◯ sandbox disabled \\(⏎ to configure\\)$",
+   "to": "◯ 沙箱已禁用（⏎ 配置）"
   }
  ],
  "exact": {
@@ -1913,6 +1925,58 @@
   "or": "或",
   "PR #": "PR #",
   "⧉ In": "⧉ 在",
-  "URL": "URL"
+  "URL": "URL",
+  "Run the workflow script delivered in this session environment (server-launched sessions only)": "运行本会话环境下发的 workflow 脚本（仅限服务器发起的会话）",
+  "(removed) Ask Claude to create/manage subagents, or edit .claude/agents/": "（已移除）让 Claude 创建/管理子代理，或编辑 .claude/agents/",
+  "Report a bug or share your conversation": "报告缺陷或分享你的对话",
+  "Move this session to a new working directory": "把本会话迁移到新的工作目录",
+  "Toggle the diff panel showing uncommitted changes": "切换差异面板，显示尚未提交的改动",
+  "Send feedback to Anthropic or report a bug": "向 Anthropic 发送反馈或报告缺陷",
+  "Copy this conversation into a new background session and keep working here": "把当前对话复制到一个新的后台会话，本会话继续工作",
+  "Dump the JS heap to the Desktop; on Linux with no Desktop folder, the home directory": "把 JS 堆转储到桌面；Linux 上无桌面目录时转储到主目录",
+  "List subagents, teammates, and other Claude sessions you can message": "列出可发消息的子代理、队友与其他 Claude 会话",
+  "Edit CLAUDE.md files and memory settings": "编辑 CLAUDE.md 文件与记忆设置",
+  "List output styles or switch to one": "列出输出风格，或切换到某个风格",
+  "Share a free week of Claude Code with friends": "向朋友分享一周免费的 Claude Code",
+  "Send a subagent off with your full context; its result comes back here": "带着完整上下文派一个子代理出去；结果回到这里",
+  "Execute a server-launched workflow handoff (workflow_launch event sessions only)": "执行服务器发起的 workflow 交接（仅限 workflow_launch 事件会话）",
+  "Configure claude-hud as your statusline": "把 claude-hud 配置为你的状态栏",
+  "Configure HUD display options (layout, presets, display elements) while preserving advanced manual overrides": "配置 HUD 显示选项（布局、预设、显示元素），同时保留高级手动覆盖设置",
+  "Deep research harness — fan-out web searches, fetch sources, adversarially verify claims, synthesize a cited report.": "深度研究框架 —— 扇出式网络检索、抓取来源、对抗式核验论断，综合成带引用的报告。",
+  "Review the changed code for reuse, simplification, efficiency, and altitude cleanups, then apply the fixes. Quality only — it does not hunt for bugs; use /code-review for that.": "审查改动代码的复用、简化、效率与抽象层次，然后应用修复。只管质量 —— 它不搜寻缺陷；找缺陷请用 /code-review。",
+  "Reference for writing a Workflow tool script (script API and gotchas, resume, quality patterns, worked examples). Load before authoring a script for a workflow the user already opted into; it does not itself authorize running one.": "撰写 Workflow 工具脚本的参考（脚本 API 与坑位、续跑、质量模式、完整示例）。在为用户已明确选择的 workflow 编写脚本之前加载；它本身不授权运行 workflow。",
+  "Verify that a code change actually does what it's supposed to by exercising it end-to-end and observing behavior — drive the affected flow, not just tests or typecheck. Run before committing nontrivial changes; bootstraps this repo's project verify skill if none exists yet. Don't invoke it on a diff that only touches tests, docs, or other code with no runtime surface to drive (a change to product source always has one) — there's nothing to observe.": "通过端到端地实际驱动并观察行为，验证一处代码改动确实产生了预期效果 —— 要驱动受影响的流程，而不只是跑测试或类型检查。在提交非平凡改动之前运行；若本仓尚无项目级 verify skill，它会先引导建立。不要对只触及测试、文档或其他没有可驱动运行时表面的代码的 diff 调用它（产品源码的改动总有运行时表面）—— 那就无可观察。",
+  "Author or improve the run-<unit> skill - a per-project skill that tells agents how to build, launch, and drive this project's app. Use when the user asks to set up the project, get it running, write run instructions, or verify build/run steps work from a clean environment.": "编写或改进 run-<unit> skill —— 一种项目级 skill，告诉代理如何构建、启动并驱动本项目的应用。适用于用户要求搭建项目、让它跑起来、编写运行说明，或从干净环境验证构建/运行步骤有效的场景。",
+  "Make a mod: a change to Claude's own interface or behaviour, such as a live pane or panel, a band above the prompt, a status line, a toast, a slash command, or a hook on tool calls or prompts. Use to make, change or debug a mod or its hooks module.": "制作 mod：对 Claude 自身界面或行为的改动，例如实时窗格或面板、提示词上方的条带、状态行、toast、斜杠命令，或对工具调用/提示词的钩子。用于制作、修改或调试 mod 及其 hooks 模块。",
+  "Use when the user wants to customize keyboard shortcuts, rebind keys, add chord bindings, or modify ~/.claude/keybindings.json. Examples: \"rebind ctrl+s\", \"add a chord shortcut\", \"change the submit key\", \"customize keybindings\".": "适用于用户想自定义键盘快捷键、重新绑定按键、添加组合键，或修改 ~/.claude/keybindings.json 的场景。示例：「rebind ctrl+s」「add a chord shortcut」「change the submit key」「customize keybindings」。",
+  "Review the current diff, or a PR number/branch/path target, for correctness bugs (plus reuse/simplification/efficiency cleanups where the model's review recipe covers them) at the given effort level (low|medium|high|xhigh|max: from few high-confidence findings up to many, some of them uncertain); with no level given, it reuses the level you typed last. Pass --comment to post findings as inline PR comments, or --fix to apply the findings to the working tree after the review. Pass --max-findings <n> to report up to n findings, or --max-findings all for every finding. The choice stays until you pass --max-findings default.": "审查当前 diff，或指定的 PR 编号/分支/路径目标，找出正确性缺陷（外加模型审查配方覆盖范围内的复用/简化/效率清理），按给定的努力级别（low|medium|high|xhigh|max：从少量高置信发现到大量、其中部分不确定）；未给级别时，沿用你上次输入的级别。传 --comment 可把发现作为 PR 内联评论发布，传 --fix 可在审查后把发现应用到工作树。传 --max-findings <n> 最多报告 n 条发现，传 --max-findings all 报告全部。该选择保持到你传入 --max-findings default 为止。",
+  "Use this skill to configure the Claude Code harness via settings.json. Automated behaviors (\"from now on when X\", \"each time X\", \"whenever X\", \"before/after X\") require hooks configured in settings.json - the harness executes these, not Claude, so memory/preferences cannot fulfill them. Also use for: permissions (\"allow X\", \"add permission\", \"move permission to\"), env vars (\"set X=Y\"), hook troubleshooting, or any changes to settings.json/settings.local.json files. Examples: \"allow npm commands\", \"add bq permission to global settings\", \"move permission to user settings\", \"set DEBUG=true\", \"when claude stops show X\". For simple settings like theme/model, suggest the /config command.": "用本 skill 通过 settings.json 配置 Claude Code 运行框架。自动化行为（「从今往后当 X」「每次 X」「每当 X」「X 之前/之后」）需要在 settings.json 中配置 hooks —— 这些由运行框架执行，而非 Claude，所以记忆/偏好无法实现它们。也用于：权限（「允许 X」「添加权限」「把权限移到」）、环境变量（「设置 X=Y」）、hook 排错，或对 settings.json/settings.local.json 文件的任何改动。示例：「allow npm commands」「add bq permission to global settings」「move permission to」「set DEBUG=true」「when claude stops show X」。简单的主题/模型切换，建议改用 /config 命令。",
+  "Health-check the user's Claude Code setup and fix issues: diagnose installation health — what the `claude doctor` terminal diagnostics cover — from local data (duplicate or leftover installs, PATH, unparseable settings files, broken or colliding agent definitions, skills whose frontmatter fails to parse); find unused skills, MCP servers, and plugins versus their context cost and disable dead weight; deduplicate local CLAUDE.md files against checked-in ones; trim checked-in CLAUDE.md files by cutting content a session could derive from the codebase (directory layouts, tech-stack lists, architecture overviews) while keeping gotchas, rationale, and non-standard conventions; migrate always-loaded CLAUDE.md guidance into lazy skills and nested CLAUDE.md files; flag slow hooks and context-heavy extensions; check the installed version is current; make auto mode the default permission mode; and pre-approve frequently denied read-only commands. Use when the user asks for a doctor run, checkup, audit, tune-up, or cleanup of their Claude Code setup or configuration.": "对用户的 Claude Code 环境做体检并修复问题：依据本地数据（重复或残留的安装、PATH、无法解析的 settings 文件、损坏或冲突的代理定义、frontmatter 解析失败的 skill）诊断安装健康度 —— 即 `claude doctor` 终端诊断所覆盖的内容；对照上下文开销找出未使用的 skill、MCP 服务器与插件，关停无用负担；把本地 CLAUDE.md 与已入库的做去重；精简已入库的 CLAUDE.md，删掉会话能从代码库推导出的内容（目录结构、技术栈清单、架构概述），同时保留坑位、理由与非标准约定；把常驻加载的 CLAUDE.md 指引迁移为惰性 skill 与嵌套 CLAUDE.md；标记缓慢的 hook 与上下文臃肿的扩展；检查所装版本是否为最新；把 auto mode 设为默认权限模式；并预先放行常被拒绝的只读命令。适用于用户要求对 Claude Code 环境或配置做体检、审计、调优或清理的场景。",
+  "Reference for the Claude API / Anthropic SDK — model ids, pricing, params, streaming, tool use, MCP, agents, caching, token counting, model migration.\nTRIGGER — read BEFORE opening the target file; don't skip because it \"looks like a one-liner\" — whenever: the prompt names Claude/Anthropic in any form (Claude, Anthropic, Fable, Opus, Sonnet, Haiku, `anthropic`, `@anthropic-ai`, `claude-*`, `us.anthropic.*`, `[1m]`); the user asks about an LLM (pricing/model choice/limits/caching) — never answer from memory; OR the task is LLM-shaped with provider unstated (agent/MCP/tool-definition/multi-agent/RAG/LLM-judge/computer-use; generate/summarize/extract/classify/rewrite/converse over NL; debugging refusals/cutoffs/streaming/tool-calls/tokens).\nSKIP only when another provider is being worked on (overrides all triggers): OpenAI/GPT/Gemini/Llama/Mistral/Cohere/Ollama named in the query; OR `grep -rE 'openai|langchain_openai|google.generativeai|genai|mistralai|cohere|ollama'` over the project hits (run this grep FIRST if no provider named — don't Read the file).": "Claude API / Anthropic SDK 参考 —— 模型 id、定价、参数、流式、工具使用、MCP、代理、缓存、token 计数、模型迁移。\n触发条件 —— 在打开目标文件之前先读；不要因为「看起来只是一行」而跳过 —— 只要：提示词以任何形式提到 Claude/Anthropic（Claude、Anthropic、Fable、Opus、Sonnet、Haiku、`anthropic`、`@anthropic-ai`、`claude-*`、`us.anthropic.*`、`[1m]`）；用户询问 LLM（定价/选型/限额/缓存）—— 绝不凭记忆回答；或任务属于 LLM 形态而未指明供应商（agent/MCP/工具定义/多代理/RAG/LLM 评判/computer-use；对自然语言做生成/摘要/抽取/分类/改写/对话；调试拒答/截断/流式/工具调用/token）。\n仅当正在处理另一家供应商时跳过（覆盖所有触发条件）：查询中指名 OpenAI/GPT/Gemini/Llama/Mistral/Cohere/Ollama；或对项目执行 `grep -rE 'openai|langchain_openai|google.generativeai|genai|mistralai|cohere|ollama'` 有命中（若未指名供应商，先跑这条 grep —— 不要先读文件）。",
+  "Use this skill whenever you are about to create ANY chart, graph, plot, dashboard, or data visualization, in ANY output medium — an HTML or React artifact, inline SVG, plotting code in any library (matplotlib, plotly, d3, Recharts, …), an image/PNG you will render and upload, or a chart shared into Slack. Read it BEFORE writing the first line of chart code, choosing chart colors, building a stat tile / meter / KPI row, or laying out a dashboard. When the destination is a first-party document connector (host-designated, never self-described) that renders live charts, hand it the rows (inline, or as an uploaded data file the chart cites) rather than a rendered PNG/SVG — a picture of a chart loses hover, data inspection and per-value comments. Produces visualizations that read as one system — elegant, accessible, consistent in light and dark — using a brand-neutral placeholder palette you swap for your own. Teaches a design-system-agnostic method: a form heuristic, a color formula with a runnable validator, mark specs, and interaction rules. A validated default palette is documented in `references/palette.md` — swap that file's values for your brand's. Triggers on: \"chart\", \"graph\", \"plot\", \"data viz\", \"visualization\", \"dashboard\", \"analytics\", \"visualize data\", \"categorical colors\", \"sequential / diverging palette\", \"stat tile\", \"sparkline\", \"heatmap\", \"legend\", \"axis\", \"tooltip\", \"chart colors\", \"color by series\".": "凡是要制作任何图表、图形、绘图、仪表盘或数据可视化时都使用本 skill —— 无论输出载体是什么：HTML 或 React 产物、内联 SVG、任意绘图库（matplotlib、plotly、d3、Recharts 等）的绘图代码、你将渲染并上传的图片/PNG，或分享到 Slack 的图表。在写下第一行图表代码之前、在挑选图表配色之前、在构建统计块/仪表/指标行之前、在布局仪表盘之前，先读它。当目标是第一方文档连接器（由宿主指定，绝不可自行声称）且能渲染实时图表时，把数据行交给它（内联，或作为图表引用的上传数据文件），而不是渲染好的 PNG/SVG —— 图片形式的图表会失去悬停、数据探查与逐值评论。产出读起来像同一套系统的可视化 —— 优雅、可访问、明暗一致 —— 使用一个品牌中立的占位调色板，供你替换为自己的。它教授一套与设计系统无关的方法：表单启发式、带可运行校验器的配色公式、标记规格与交互规则。一套经校验的默认调色板记录在 `references/palette.md` —— 把该文件的值换成你品牌的。触发词：「chart」「graph」「plot」「data viz」「visualization」「dashboard」「analytics」「visualize data」「categorical colors」「sequential / diverging palette」「stat tile」「sparkline」「heatmap」「legend」「axis」「tooltip」「chart colors」「color by series」。",
+  "Continue automatically at usage limit": "达到用量上限时自动继续",
+  "Switch models when a message is flagged": "消息被标记时切换模型",
+  "Session recap": "会话总结",
+  "Ultracode keyword trigger": "Ultracode 关键词触发",
+  "Dynamic workflow size": "动态 workflow 规模",
+  "Time format": "时间格式",
+  "Worktree base ref": "worktree 基础引用",
+  "Skip the /copy picker": "跳过 /copy 选择器",
+  "Auto-scroll": "自动滚动",
+  "Open agents view by default": "默认打开代理视图",
+  "← opens agents": "← 打开代理视图",
+  "Theme": "主题",
+  "Local notifications": "本地通知",
+  "Language": "语言",
+  "Question auto-continue timeout": "提问自动继续超时",
+  "Show last response in external editor": "在外部编辑器中显示最近一次回复",
+  "Model": "模型",
+  "Dialog expiry": "对话框过期时间",
+  "Messages from your other sessions": "来自你其他会话的消息",
+  "Project instructions": "项目指令",
+  "\"claude-md\": CLAUDE.md only, loaded by the engine as today. \"claude-md-or-agents-md\" (default): a project with no CLAUDE.md of its own gets its AGENTS.md files instead, loaded exactly where and how CLAUDE.md would be. \"claude-md-and-agents-md\": AGENTS.md files are loaded beside CLAUDE.md (a file CLAUDE.md already imports or links to is not loaded twice). \"managed-only\": the project's and your own instruction files are dropped; the organization's managed CLAUDE.md and memory stay.": "「claude-md」：只用 CLAUDE.md，与现在一样由引擎加载。「claude-md-or-agents-md」（默认）：项目自己没有 CLAUDE.md 时，改为加载其 AGENTS.md 文件，加载的位置与方式与 CLAUDE.md 完全相同。「claude-md-and-agents-md」：AGENTS.md 与 CLAUDE.md 并存加载（CLAUDE.md 已经 import 或链接到的文件不会重复加载）。「managed-only」：丢弃本项目与你自己的指令文件；组织的托管 CLAUDE.md 与记忆保留。",
+  "(shift+tab to cycle) · ← for agents": "（shift+tab 切换）· ← 查看代理",
+  "(shift+tab to cycle)": "（shift+tab 切换）",
+  "Config dialog dismissed": "配置对话框已关闭"
  }
 }

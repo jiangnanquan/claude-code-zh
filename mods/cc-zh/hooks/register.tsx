@@ -76,6 +76,41 @@ export function tr(d: Dict, text: string): string {
 }
 
 /**
+ * 与 `tr` 同源，但**区分「译到了」与「原样放行」**：没译到一律返回 undefined。
+ *
+ * 为什么需要它：`command.describe` 的 key 是引擎给的整句描述，调用方必须能分辨
+ * 「命中」与「未命中」。而该处原先只做裸 exact 查表、不过 patterns ⇒
+ * 带**运行时变量**的描述（`/model` 的 `(currently …)`、`/fast` 的 `(Opus)`、
+ * `/sandbox` 的状态）结构性无法汉化。此函数让 patterns 在这条路径上生效。
+ */
+export function trDesc(d: Dict, text: string): string | undefined {
+  const bare = text.replace(ANSI, '')
+  const out = tr(d, text)
+  return out === bare ? undefined : out
+}
+
+/**
+ * Spinner 用词：**只在当前词仍是英文时**才接替；已含中文一律放行。
+ *
+ * 为什么必须这样：用户很可能已经用官方 `settings.json` 的 `spinnerVerbs`
+ * 配了自定义中文动词（例如「烘焙中」「焯水ing」），此时 `props.word` **本来就是中文**。
+ * 若无条件用固定词表覆盖，等于把别人的趣味动词换成「思考中」，是体验退化。
+ *
+ * @returns `word` 最终采用的词（原样返回时保持 `undefined` 语义）；`missed` 表示
+ *          「当前仍是英文，但词典里没有对应词」—— 供 `/cc-zh-dump` 收集。
+ */
+export function spinnerWord(
+  d: Dict,
+  mode: string,
+  current?: string,
+): { word?: string; missed: boolean } {
+  if (CJK.test(String(current ?? ''))) return { word: current, missed: false }
+  const zh = d.spinner[mode]
+  if (!zh) return { word: current, missed: true }
+  return { word: zh, missed: false }
+}
+
+/**
  * 提示行文案：只有「整句都译到」才接受，否则放行原文。
  * 理由：提示行是短句，半英半中的观感比全英文更差（ko-ui 同判据）。
  */
@@ -175,12 +210,12 @@ export const register: Register = on => {
   on('command.describe', async ($, e, next) => {
     const d = await load($)
     const r = await next(e)
-    const zh = d.exact[(r.description ?? '').trim()]
-    if (!zh) {
+    const zh = trDesc(d, r.description ?? '')
+    if (zh === undefined) {
       record($, `cmd:${e.command}`, r.description ?? '')
       return r
     }
-    const hint = r.argumentHint ? d.exact[String(r.argumentHint).trim()] : undefined
+    const hint = r.argumentHint ? trDesc(d, String(r.argumentHint)) : undefined
     return { ...r, description: zh, argumentHint: hint ?? r.argumentHint }
   })
 
@@ -205,9 +240,9 @@ export const register: Register = on => {
       if (out === String(message).replace(ANSI, '')) record($, 'spinner', message)
       else message = out
     }
-    const word = d.spinner[p.mode]
-    if (!word) record($, `spinner-mode`, p.mode)
-    return next({ ...e, props: { ...p, word: word ?? p.word, message } })
+    const { word, missed } = spinnerWord(d, p.mode, p.word)
+    if (missed) record($, `spinner-mode`, p.mode)
+    return next({ ...e, props: { ...p, word, message } })
   })
 
   // ── 提示行（整句译到才替换）──
