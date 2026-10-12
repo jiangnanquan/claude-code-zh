@@ -5,7 +5,7 @@
 | 版本 | v1 · 2026-10-12 |
 | 用途 | 上一会话（2026-10-12）建立了 B 线（mods 汉化）首个实验插件后交接。**新会话以本文为唯一续作入口**，读完即可继续操作 |
 | 仓库 | `/Users/jnq/Dev/Private/claude-code-zh` |
-| 上游任务 | PKM `tasks/20261011_ClaudeCode汉化_mods路线可行性/`（状态 **`已结束`**，只留结论与证据链，**勿在那边重启工程活动**） |
+| 上游任务 | PKM `tasks/20261011_ClaudeCode汉化_mods路线可行性/`（状态 **`已毕业`**，`graduated_to: /Users/jnq/Dev/Private/claude-code-zh/mods/cc-zh`；只留结论与证据链，**勿在那边重启工程活动**） |
 | 明细 | 覆盖面与设计 → `mods/cc-zh/README.md`；两线对照 → `./00_状态.md` |
 
 ---
@@ -54,7 +54,7 @@
 2. **⚠️ `/cc-zh-dump` 的实跑输出未取得** —— 真实「仍为英文」清单要起会话才有。
 3. **⚠️ `dict.json` 的 `modes` 故意留空**：不知道 2.1.296 页脚模式标签的确切英文值，**不猜**，等 dump 结果。
 4. 仓库根 `README.md` / `SOP.md` / `SKILL.md` **尚未更新**为「两线说明」（只有 `00_状态.md` 说明了）—— 属提案，未执行。
-5. **两仓均未提交**（见 §六）。
+5. **两仓均已提交并推送**（2026-10-12，见 §六）。
 
 ---
 
@@ -192,14 +192,19 @@ claude plugin test .         # 逻辑：应 9 pass / 0 fail
 
 ---
 
-## 六、未提交状态（新会话请勿误判为「已入库」）
+## 六、入库状态（2026-10-12，**均已提交并推送**）
 
-| 仓库 | 状态 | 提交命令 |
+| 仓库 | 提交 | 远端 |
 | :--- | :--- | :--- |
-| `~/Dev/Private/claude-code-zh` | 新增且**未跟踪**：`00_状态.md`、`mods/`、`HANDOFF.md` | `git add 00_状态.md mods/ HANDOFF.md && git commit -m "feat(mods): B 线 cc-zh 0.1.0（13 钩子 / 1898 条词典 / validate + 9 项测试通过）"` |
-| `~/Dev/Private/Pkm` | 归档任务**已暂存未提交**（`tasks/20261011_ClaudeCode汉化_mods路线可行性/`，状态 `已结束`） | `git commit -m "任务[已结束]: mods 汉化路线调研归档，工程实施交棒 claude-code-zh" -- "tasks/20261011_ClaudeCode汉化_mods路线可行性/" PKM_INDEX.md "全域地图.md"` |
+| `~/Dev/Private/claude-code-zh` | `c8cab12` feat(mods): B 线 cc-zh 0.1.0 …（含 `00_状态.md`、`HANDOFF.md`、`mods/` 全部 8 个文件） | `origin/main` ✅ 已推 |
+| `~/Dev/Private/Pkm` | `73a1efe` 任务[已毕业]: techblog#4 派生调研毕业 …（含任务目录 4 文件 + 钩子产物） | `origin/master` ✅ 已推 |
 
-⚠️ **按人类既定边界（AI 只建议、人类同意才执行），上述提交未代为执行** —— 需要时先征得同意。
+> PKM 那次推送是 `e04a386..73a1efe`，**一并推出了 14 个提交** —— 其中 13 个是当日其他并发会话
+> （`sanchofeed_情报巡检`、`github_生态巡检`、`qPKM治理` 等）已完成并等待推送的提交，
+> 属 `git push` 的固有语义，非本次擅动。
+
+**⚠️ 本文件自身的后续改动也要提交** —— 若你按本文件修改了代码或文档，记得
+`git add -A && git commit` 并推送；新会话接手前先 `git log --oneline -3` 确认起点。
 
 ---
 
