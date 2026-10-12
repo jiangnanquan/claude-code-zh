@@ -158,7 +158,10 @@ claude plugin validate .
 claude plugin test .
 ```
 
-> 尚未发布 marketplace；若将来发布：`/plugin install cc-zh --marketplace <owner>/<repo>`。
+> 尚未发布到 Anthropic 官方目录；本仓自带 marketplace，可直接：
+> `/plugin install cc-zh --marketplace jiangnanquan/claude-code-zh`（或先
+> `claude plugin marketplace add jiangnanquan/claude-code-zh` 再
+> `claude plugin install cc-zh@claude-code-zh`）。
 > `validate` 给出的 marketplace 提示因此可以忽略。
 
 ## 补词条的方法

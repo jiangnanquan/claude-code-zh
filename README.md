@@ -38,6 +38,13 @@ Just run `claude` and the UI is localized. Edits to the dictionary or hooks in t
 effect immediately — no reinstall. Delete that line to restore the original English UI.
 For one-off testing or A/B comparison use `claude --plugin-dir <plugin dir>` (session only).
 
+Alternatively, install from this repo's marketplace:
+
+```bash
+claude plugin marketplace add jiangnanquan/claude-code-zh
+claude plugin install cc-zh@claude-code-zh
+```
+
 ### What it localizes
 
 A static dictionary rewrites engine-rendered output across 11 surfaces. All rewrites are
@@ -175,6 +182,13 @@ MIT. The dictionary foundation comes from the
 
 直接敲 `claude` 即带汉化；仓库里改完词典或 hooks **立即生效、无需重装**。
 删掉这一行即完全还原英文。单次试装或 A/B 对比用 `claude --plugin-dir <插件目录>`（仅本次会话）。
+
+也可以用本仓自带的 marketplace 安装：
+
+```bash
+claude plugin marketplace add jiangnanquan/claude-code-zh
+claude plugin install cc-zh@claude-code-zh
+```
 
 ### 它做什么
 

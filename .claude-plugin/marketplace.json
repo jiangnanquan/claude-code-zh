@@ -1,0 +1,15 @@
+{
+  "name": "claude-code-zh",
+  "description": "Simplified Chinese UI localization for Claude Code, built on official mods (function hooks). Static dictionary, zero tokens, zero network, no official artifacts modified.",
+  "owner": {
+    "name": "jiangnanquan",
+    "url": "https://github.com/jiangnanquan"
+  },
+  "plugins": [
+    {
+      "name": "cc-zh",
+      "description": "Localize Claude Code's slash-command descriptions, /config items, spinner, hints, notices, command output, tool summaries and turn duration into Simplified Chinese.",
+      "source": "./mods/cc-zh"
+    }
+  ]
+}
