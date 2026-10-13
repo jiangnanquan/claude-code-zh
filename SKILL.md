@@ -1,5 +1,5 @@
 ---
-name: claude-code-zh
+name: q-zh-claude
 description: Claude Code CLI 简体中文汉化（自管 mods 插件）——静态词典 + 官方 hooks，只改 UI 显示文字，零 token、零网络、不碰官方产物。适用场景：「汉化cc」「重新汉化」「汉化不生效」「cc升级后重汉化」「还原英文」「检查汉化状态」「补词条」。维护 ~/Dev/Private/claude-code-zh/mods/cc-zh。
 allowed-tools: Bash
 ---
@@ -47,6 +47,15 @@ claude --plugin-dir "$PWD"
 4. **给官方本地化开关让路**：`spinnerVerbs` 已含中文时原样放行，不覆盖用户配置
 5. **按设计不可汉化**：权限确认窗口、欢迎屏、`/config` `/model` 子选择屏、错误信息、
    tips、`auto mode on` pill、`claude --help`——不是 bug，别去试
+
+## 交付闭环与 Git 提交/推送规程
+
+每次改完词典/插件并全绿通过自检与验收后：
+1. **更新状态与文档**：更新 `00_状态.md` 记录本次词条增补或升级适配；
+2. **规范原子提交**：`git status` 确认无脏文件，执行本地原子提交（`git commit -m "feat(i18n): ..."`）；
+3. **推送决策**：
+   - 默认模式：主动汇报验收结果与 commit 哈希，询问用户是否执行 `git push`；
+   - 授权模式：用户要求“提交并 push”或明确许可时，主动执行 `git push origin main` 并汇报结果。
 
 ## 项目位置与入口
 
