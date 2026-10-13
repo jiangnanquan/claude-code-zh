@@ -1,7 +1,7 @@
 {
   "name": "cc-zh-runtime-sampler",
   "version": "0.1.0",
-  "description": "采样插件（非发布物）：把引擎的**运行时字符串**（命令描述 / 配置项 / 各渲染点 props）原样导出为 JSON，供 cc-zh 的 exact 词典取权威 key。只读、只写 /tmp，不翻译、不改动任何东西。",
+  "description": "Development only: 采样插件（非发布物）：把引擎的**运行时字符串**（命令描述 / 配置项 / 各渲染点 props）原样导出为 JSON，供 cc-zh 的 exact 词典取权威 key。只读、只写 /tmp，不翻译、不改动任何东西。",
   "author": { "name": "jnq" },
   "license": "MIT"
 }
