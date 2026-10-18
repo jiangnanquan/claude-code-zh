@@ -1,5 +1,11 @@
 # cc-zh — Claude Code 简体中文 UI mod（0.1.0）
 
+[![Validates on](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/jiangnanquan--claude-code-zh--cc-zh-validates.svg)](https://mods.aidojo.si/#jiangnanquan--claude-code-zh--cc-zh)
+[![Reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/jiangnanquan--claude-code-zh--cc-zh-reach.svg)](https://mods.aidojo.si/#jiangnanquan--claude-code-zh--cc-zh)
+[![Mentioned in Awesome Claude Code Mods](https://awesome.re/mentioned-badge.svg)](https://github.com/karanb192/awesome-claude-code-mods)
+[![Catalogue](https://img.shields.io/badge/catalogue-mods.aidojo.si-3B82F6?logo=anthropic)](https://mods.aidojo.si/#jiangnanquan--claude-code-zh--cc-zh)
+[![Featured in Community Mods](https://img.shields.io/badge/community_mods-hamzafer-orange?logo=github)](https://github.com/hamzafer/claude-code-mods#--community-mods)
+
 > **B 线**：2.1.287+ 的官方扩展点（mods）。**不碰官方产物**——不改二进制、不改字节码；
 > 失效时退回英文原文，不会把 CLI 改崩。零 token、零网络。
 

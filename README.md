@@ -1,5 +1,11 @@
 # claude-code-zh — Claude Code Simplified Chinese Localization (mods)
 
+[![Validates on](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/jiangnanquan--claude-code-zh--cc-zh-validates.svg)](https://mods.aidojo.si/#jiangnanquan--claude-code-zh--cc-zh)
+[![Reach](https://raw.githubusercontent.com/karanb192/awesome-claude-code-mods/main/badges/jiangnanquan--claude-code-zh--cc-zh-reach.svg)](https://mods.aidojo.si/#jiangnanquan--claude-code-zh--cc-zh)
+[![Mentioned in Awesome Claude Code Mods](https://awesome.re/mentioned-badge.svg)](https://github.com/karanb192/awesome-claude-code-mods)
+[![Catalogue](https://img.shields.io/badge/catalogue-mods.aidojo.si-3B82F6?logo=anthropic)](https://mods.aidojo.si/#jiangnanquan--claude-code-zh--cc-zh)
+[![Featured in Community Mods](https://img.shields.io/badge/community_mods-hamzafer-orange?logo=github)](https://github.com/hamzafer/claude-code-mods#--community-mods)
+
 **Language:** [English](#english) · [简体中文](#简体中文)
 
 A self-managed **Claude Code CLI localization project**: our own dictionary, our own hooks
