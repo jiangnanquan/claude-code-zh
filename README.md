@@ -5,6 +5,11 @@
 [![Mentioned in Awesome Claude Code Mods](https://awesome.re/mentioned-badge.svg)](https://github.com/karanb192/awesome-claude-code-mods)
 [![Catalogue](https://img.shields.io/badge/catalogue-mods.aidojo.si-3B82F6?logo=anthropic)](https://mods.aidojo.si/#jiangnanquan--claude-code-zh--cc-zh)
 [![Featured in Community Mods](https://img.shields.io/badge/community_mods-hamzafer-orange?logo=github)](https://github.com/hamzafer/claude-code-mods#--community-mods)
+[![Claude Code](https://img.shields.io/badge/Claude_Code-%E2%89%A52.1.287-blue)](https://github.com/jiangnanquan/claude-code-zh)
+[![Tests](https://img.shields.io/badge/tests-11%20pass-success)](https://github.com/jiangnanquan/claude-code-zh)
+[![Token Cost](https://img.shields.io/badge/token_cost-0-brightgreen)](https://github.com/jiangnanquan/claude-code-zh)
+[![Network](https://img.shields.io/badge/network-zero-blue)](https://github.com/jiangnanquan/claude-code-zh)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/jiangnanquan/claude-code-zh/blob/main/LICENSE)
 
 **Language:** [English](#english) · [简体中文](#简体中文)
 
