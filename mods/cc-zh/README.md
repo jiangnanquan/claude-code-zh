@@ -16,7 +16,7 @@
 
 | 项 | 值 |
 | :--- | :--- |
-| 词典 | `exact` **1950** 条 · `patterns` **4** 条 · `spinner` 5 条 · `modes` **空**（见下） |
+| 词典 | `exact` **2010** 条 · `patterns` **4** 条 · `spinner` 5 条 · `modes` **空**（见下） |
 | `/cc-zh-dump` | **命令 0，配置 0，屏幕文案 0** —— 本轮采集到的未译项已全部补齐 |
 | 装配校验 | `claude plugin validate .` → Validation passed（13 钩子 + 8 个 `$` 调用） |
 | 运行时测试 | `claude plugin test .` → **11 pass / 0 fail** |
@@ -125,7 +125,7 @@ mods/cc-zh/
 ├── .claude-plugin/plugin.json   清单（types/ 由 CLI 生成，已 gitignore）
 ├── hooks/hooks.json             指向 ./register.tsx
 ├── hooks/register.tsx           全部 13 个钩子（含 /cc-zh-dump）
-├── dict.json                    词典：exact(1950) + spinner + modes + patterns(4)
+├── dict.json                    词典：exact(2010) + spinner + modes + patterns(4)
 ├── tests/register.test.ts       11 项运行时测试
 └── tools/                       验收与采样工具（非发布物）
     ├── tty-probe.py             TTY 排版验收（可复算证据）
